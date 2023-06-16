@@ -19,6 +19,7 @@ export class FormTicketComponent implements OnInit {
   constructor(private router:Router,private activedRouter:ActivatedRoute,private toast:ToastrService, private espectadorService:EspectadorService, private ticketService:TicketServiceService) { 
     this.ticket=new Ticket();
     this.espectadores = new Array<Espectador>();
+    this.getEspectadores();
   }
 
   ngOnInit(): void {
@@ -159,6 +160,10 @@ export class FormTicketComponent implements OnInit {
     });
   }
   
+  public volver()
+  {
+    this.router.navigateByUrl("/tickets")
+  }
   }
 
 

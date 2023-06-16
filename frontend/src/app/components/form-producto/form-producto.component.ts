@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/models/producto';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { ProductoService } from 'src/app/services/producto.service';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-producto',
@@ -14,7 +15,7 @@ export class FormProductoComponent implements OnInit {
   
   producto!:Producto;
   img64!:string;
-  constructor(private toast:ToastrService,private domSanitizer: DomSanitizer, private productoService:ProductoService) {
+  constructor(private toast:ToastrService,private domSanitizer: DomSanitizer, private productoService:ProductoService, private router:Router) {
     this.producto = new Producto();
    }
   
@@ -40,34 +41,21 @@ export class FormProductoComponent implements OnInit {
       if (result.isConfirmed) {
         console.log("confirmo")
         
+         this.productoService.postProducto(this.producto).subscribe(
+          result=>
+          {
 
-        
-        // this.productoService.postProducto(this.producto).subscribe(
-        //   result=>
-        //   {
+            this.router.navigateByUrl("/productos");
+            this.toast.success("Producto Registrado Correctamente")
+            
 
-        //     this.toast.success("Producto Registrado Correctamente")
-
-        //   },
-        //   error=>
-        //   {
-
-
-
-         // }
-       // )
+          },
+          error=>
+          {
 
 
-       this.productoService.uploadImageToImgBB(this.img64).subscribe(
-        result=>
-        {
-          console.log(result);
-        },
-        error=>
-        {
-          console.log(error);
-        }
-        
+
+         }
        )
 
      
@@ -84,6 +72,21 @@ export class FormProductoComponent implements OnInit {
 
 }
 
+subirImagenRepo()
+{
+  this.productoService.uploadImageToImgBB(this.img64).subscribe(
+    result=>
+    {
+      console.log(result);
+    },
+    error=>
+    {
+      console.log(error);
+    }
+    
+   )
+}
+
 onFileSelected(event: any) {
   console.log("entro");
   const file = event.target.files[0];
@@ -98,7 +101,11 @@ onFileSelected(event: any) {
   
   reader.readAsDataURL(file); 
   }
-  
+ 
+  public volver()
+  {
+    this.router.navigateByUrl("/productos");
+  }
 }
 
 

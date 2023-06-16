@@ -8,6 +8,7 @@ import { ListTransaccionComponent } from './components/list-transaccion/list-tra
 import { ConversionComponent } from './components/conversion/conversion.component';
 
 const routes: Routes = [
+  {path:"", pathMatch:'full',redirectTo:"productos"},
   {path:"productos", component: ProductosComponent},
   {path:"formulario", component: FormProductoComponent},
   {path:"tickets", component:ListaTicketComponent},

@@ -1,0 +1,9 @@
+.primera-column{
+justify-self: start;
+}
+.segunda-column{
+justify-self: start;
+}
+.tercera-column{
+justify-self: end;
+}

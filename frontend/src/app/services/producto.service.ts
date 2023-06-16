@@ -16,7 +16,7 @@ export class ProductoService {
     const options={
       headers: new HttpHeaders({
         "Content-type": "application/json"
-      }),
+      })
     }
     const body = JSON.stringify(producto);
   return this._http.post(this.URI,body,options);
@@ -29,6 +29,13 @@ export class ProductoService {
     }
 
    return this._http.get(this.URI+"/destacados",options);
+  }
+  public getAllProductos():Observable<any>
+  {
+    const options = {
+      'headers' : new HttpHeaders({})
+    }
+   return this._http.get(this.URI,options); 
   }
 
   uploadImageToImgBB(imageBase64: string) {

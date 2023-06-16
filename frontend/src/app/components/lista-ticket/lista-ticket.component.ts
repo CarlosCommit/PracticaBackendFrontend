@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TicketServiceService } from 'src/app/services/ticket-service.service';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { Ticket } from 'src/app/models/ticket';
+
 
 @Component({
   selector: 'app-lista-ticket',
@@ -10,12 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListaTicketComponent implements OnInit {
 
-  registros!: Array<any>
+  registros!: Array<Ticket>
   filtro: String = "all";
 
 
 
-  constructor(private ticketService: TicketServiceService,private toast:ToastrService) { }
+  constructor(private ticketService: TicketServiceService,private toast:ToastrService) {
+    this.registros = new Array<Ticket>();
+   }
 
   ngOnInit(): void {
     this.filtrar(this.filtro);
@@ -23,12 +27,16 @@ export class ListaTicketComponent implements OnInit {
   }
 
   public filtrar(evento: any): void {
-
-    console.log(evento)
+    this.registros=[];
     this.ticketService.getTickets(evento).subscribe(
       result => {
-        this.registros = result;
-        console.log(result);
+        let ticket = new Ticket();
+        result.forEach((element:any)=>
+        {
+          Object.assign(ticket, element);
+          this.registros.push(ticket);
+          ticket = new Ticket();
+        })
       },
       error => {
 

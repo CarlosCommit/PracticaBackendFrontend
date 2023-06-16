@@ -1,11 +1,21 @@
-<div class="row">
-    <div class="col-12 col-sm-12">
-        <form #formProducto="ngForm" >
+<div class="row justify-content-center mt-4">
 
+  <div class="col-12 col-sm-12 d-flex  align-items-center" >
+    <div class="icon-volver mx-1" (click)="volver()" >
+      <img src="assets/images/back-icon.png" alt="" class="img-fluid">
+    </div>
+    <span>
+        Volver
+    </span>
+</div>
+
+    <div class="col-8 col-sm-8">
+      <h1 class="text-center">Registrar Producto</h1>
+        <form #formProducto="ngForm" >
             <div class="form-group mb-3">
                 <label for="nombre">Nombre</label>
                 <input type="text" class="form-control" id="nombre" 
-                    placeholder="Ingrese nombre" id="nombre" name="nombre"  #nombre="ngModel" [(ngModel)]="producto.nombre"  [required]="true">
+                    placeholder="Ingrese nombre" id="nombre" name="nombre"  #nombre="ngModel" [(ngModel)]="producto.nombre"  [required]="true" >
                     <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger rounded-0 mt-1">
                       <div *ngIf="nombre.errors?.['required']" class="alert-danger">
                         Debe ingresar el nombre del producto antes de continuar con el registro.
@@ -43,32 +53,42 @@
                       </div>
                     </div>
             </div>
+            <div class="form-group mb-3">
+              <label for="stock">Url Imagen</label>
+              <input type="text" class="form-control" id="url" 
+                  placeholder="Url Imagen" name="url" #urlImagen="ngModel" [(ngModel)]="producto.img" required>
+                  <div *ngIf="urlImagen.invalid && (urlImagen.dirty || urlImagen.touched)" class="alert alert-danger rounded-0 mt-1">
+                    <div *ngIf="urlImagen.errors?.['required']" class="alert-danger">
+                      Debe ingresar la url de la imagen del producto antes de continuar con el registro.
+                    </div>
+                  </div>
+          </div>
+
+<!--
             <div class="form-check mb-3">
+              
               <input
               type="file"
               id="fileInput"
               accept="image/*"
-              class="form-control-file"
+              class="form-control" 
               (change)="onFileSelected($event)"/>
-              
-             
             </div>
-
+            -->
             <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" [value]=true checked [(ngModel)]="producto.destacado" required="true">
                 <label class="form-check-label" for="exampleRadios1">
                  Destacado
                 </label>
               </div>
-
-
-
               <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" [value]=false [(ngModel)]="producto.destacado ">
                 <label class="form-check-label" for="exampleRadios2">
                   No Destacado
                 </label>
               </div>
+
+             Destacado: {{producto.destacado}}
               <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary" (click)="registrar()" [disabled]="!formProducto.valid">Registrar</button>
               </div>

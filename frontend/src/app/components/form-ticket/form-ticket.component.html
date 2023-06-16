@@ -1,5 +1,15 @@
-<div class="row">
-  <div class="col-12 col-sm-12">
+<div class="row justify-content-center  mt-4">
+
+  <div class="col-12 col-sm-12 d-flex  align-items-center" >
+    <div class="icon-volver mx-1" (click)="volver()">
+      <img src="assets/images/back-icon.png" alt="" class="img-fluid">
+    </div>
+    <span>
+        Volver
+    </span>
+</div>
+
+  <div class="col-8 col-sm-8">
     <form #ticketForm="ngForm"> 
       <h1 class="text-center" *ngIf="accion=='new'">ALTA DE REGISTRO</h1>
       <h1 class="text-center" *ngIf="accion=='edit'">EDICION DE REGISTRO</h1>
@@ -58,7 +68,7 @@
       <div class="d-flex justify-content-center align-items-center">
         <button  *ngIf="accion=='new'" type="submit" class="btn btn-success mx-3" (click)="guardar()" [disabled]="!ticketForm.valid">Guardar</button>
         <button *ngIf="accion=='edit'" type="submit" class="btn btn-success mx-3" (click)="editar()"  [disabled]="!ticketForm.valid">Editar</button>
-        <button  type="submit" class="btn btn-danger mx-3" routerLink="/tickets">Volver</button>
+        <button  type="submit" class="btn btn-danger mx-3" routerLink="/tickets">Cancelar</button>
       </div>
      
     </form>

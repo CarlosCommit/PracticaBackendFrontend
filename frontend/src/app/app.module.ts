@@ -14,6 +14,8 @@ import { FormTicketComponent } from './components/form-ticket/form-ticket.compon
 import { ListaTicketComponent } from './components/lista-ticket/lista-ticket.component';
 import { ListTransaccionComponent } from './components/list-transaccion/list-transaccion.component';
 import { ConversionComponent } from './components/conversion/conversion.component';
+import { PesosPipe } from './pipes/pesos.pipe';
+import { EspectadorPipe } from './pipes/espectador.pipe';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ConversionComponent } from './components/conversion/conversion.componen
     FormTicketComponent,
     ListaTicketComponent,
     ListTransaccionComponent,
-    ConversionComponent
+    ConversionComponent,
+    PesosPipe,
+    EspectadorPipe
   ],
   imports: [
     BrowserModule,

@@ -2,12 +2,25 @@
 <div class="row">
     <h1 class="title text-center">Productos Destacados</h1>
     <div class="col-12 col-sm-12 mb-4">
-      <div class="row justify-content-end">
-          <div class="col-auto">
-              <button class="btn btn-primary"  [routerLink]="'/formulario'">Registrar Producto</button>
-          </div>
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-primary"  [routerLink]="'/formulario'">Registrar Producto</button>
       </div>
-  
+
+          <div class="col-auto ">
+
+              <div class="d-flex justify-content-center align-items-center">
+                  <label class="mx-3" for="autoSizingSelect">Filtrar:</label>
+                  <select class="form-select" id="autoSizingSelect" name="filtro" [(ngModel)]="filtro"
+                      (ngModelChange)="filtrar($event)">
+                      <option value="destacados" [selected]="filtro==='destacados'">Destacados</option>
+                      <option value="all">Todos</option>
+                  </select>
+              </div>
+          </div>
+
+      </div>
+
   </div>
 </div>
 
@@ -17,8 +30,8 @@
     <div class="card">
   <img class="card-img-top" src="{{producto.img}}" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{producto.precio}} {{producto.nombre}}</h5>
-    <p class="card-text">{{producto.descripcion}}</p>
+    <h5 class="card-title texto-largo">{{producto.precio | pesos}}  {{producto.nombre}}</h5>
+    <p class="card-text texto-largo">{{producto.descripcion}}</p>
     <a href="#" class="btn btn-primary">Comprar</a>
   </div>
 </div>

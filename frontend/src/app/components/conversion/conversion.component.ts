@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionService } from 'src/app/services/transaccion.service';
 
@@ -19,7 +20,7 @@ export class ConversionComponent implements OnInit {
   transaccion!:Transaccion;
 
 
-  constructor(private conversion:TransaccionService) { 
+  constructor(private conversion:TransaccionService, private router:Router) { 
 
 
     this.transaccion= new Transaccion();
@@ -66,4 +67,9 @@ export class ConversionComponent implements OnInit {
     });
   }
 
+  public volver()
+  {
+    this.router.navigateByUrl("/transacciones");
+    
+  }
 }
