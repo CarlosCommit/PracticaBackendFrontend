@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-12 col-sm-12">
+    <form #ticketForm="ngForm"> 
+      <h1 class="text-center" *ngIf="accion=='new'">ALTA DE REGISTRO</h1>
+      <h1 class="text-center" *ngIf="accion=='edit'">EDICION DE REGISTRO</h1>
+      <div class="mb-3">
+        <label for="dni" class="form-label">Espectador</label>
+        <select class="form-control" id="dni"  name="espectador" #espectador="ngModel" [(ngModel)]="ticket.espectador" required>
+          <option [ngValue]="espectador" *ngFor="let espectador of espectadores">
+              {{espectador.dni}}     
+          </option>
+        </select>
+        <div *ngIf="espectador.invalid && (espectador.dirty || espectador.touched)" class="alert alert-danger rounded-0 mt-1">
+          <div *ngIf="espectador.errors?.['required']" class="alert-danger">
+            El espectador es necesario
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="fecha" class="form-label" >Fecha De compra</label>
+        <input type="date" class="form-control" id="fecha" name="fecha"  #fecha="ngModel" [(ngModel)]="ticket.fechaCompra" required disabled="true">
+        <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)" class="alert alert-danger rounded-0 mt-1">
+          <div *ngIf="fecha.errors?.['required']" class="alert-danger">
+           El precio es obligatorio
+          </div>
+        </div>
+      </div>
+    
+    
+      <div class="mb-3">
+        <label for="precioReal" class="form-label" >Precio</label>
+        <input type="number" class="form-control" id="PrecioReal" name="precioReal"  #precio="ngModel" [(ngModel)]="ticket.precioTicket" required >
+        <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="alert alert-danger rounded-0 mt-1">
+          <div *ngIf="precio.errors?.['required']" class="alert-danger">
+           El precio es obligatorio
+          </div>
+        </div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="Tipo" class="form-label">Tipo de Espectador</label>
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" #categoria="ngModel" name="categoria" [(ngModel)]="ticket.categoriaEspectador">
+            <option value="l" name="tipo">Local</option>
+            <option value="e" name="tipo">Extranjero</option>
+          </select>
+          <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="alert alert-danger rounded-0 mt-1">
+            <div *ngIf="categoria.errors?.['required']" class="alert-danger">
+              La categoria es necesario
+            </div>
+          </div>
+      </div>
+      <!-- 
+      <div class="mb-3" *ngIf="ticket.precioCobrado!==0">
+        <label for="Precio Cobrado" class="form-label">Precio a Cobrar {{ticket.precioCobrado | moneda}}</label>
+      </div>-->
+      
+      <div class="d-flex justify-content-center align-items-center">
+        <button  *ngIf="accion=='new'" type="submit" class="btn btn-success mx-3" (click)="guardar()" [disabled]="!ticketForm.valid">Guardar</button>
+        <button *ngIf="accion=='edit'" type="submit" class="btn btn-success mx-3" (click)="editar()"  [disabled]="!ticketForm.valid">Editar</button>
+        <button  type="submit" class="btn btn-danger mx-3" routerLink="/tickets">Volver</button>
+      </div>
+     
+    </form>
+    
+  </div>
+</div>

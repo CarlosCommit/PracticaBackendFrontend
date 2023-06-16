@@ -1,0 +1,57 @@
+  <!--CONTENIDO-->
+
+  <div class="row">
+
+     <!--Formulario -->
+  <div class="col-md-12 bg-light p-4 col-12">
+    <h3 class="mb-4">Conversor de Divisas</h3>
+    <form #formularioConversion="ngForm">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="email" name="email" #email="ngModel" [(ngModel)]="transaccion.emailCliente" (input)="limpiar()" required>
+          
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger rounded-0 mt-1">
+              <div *ngIf="email.errors?.['required']" class="alert-danger">
+                Debe ingresar un correo electrónico antes de continuar.
+              </div>
+            </div>
+          </div>
+      <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad" placeholder="Cantidad" name="cantidad" #cantidad="ngModel" [(ngModel)]="transaccion.cantidadOrigen" (input)="limpiar()" required >
+        <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)" class="alert alert-danger rounded-0 mt-1">
+          <div *ngIf="cantidad.errors?.['required']" class="alert-danger">
+            Debe ingresar una cantidad antes de continuar.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="moneda" class="form-label">De</label>
+        <select class="form-control" name="moneda" id="moneda" #moneda="ngModel" [(ngModel)]="transaccion.monedaOrigen" (input)="limpiar()" required>
+          <option *ngFor="let moneda of monedas" [value]="moneda.symbol">{{moneda.name}}</option>
+        </select>
+        <div *ngIf="moneda.invalid && (moneda.dirty || moneda.touched)" class="alert alert-danger rounded-0 mt-1">
+          <div *ngIf="moneda.errors?.['required']" class="alert-danger">
+            Debe ingresar una moneda antes de continuar.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="conversion" class="form-label">A</label>
+        <select class="form-control" name="conversion" id="conversion" #conversion="ngModel" [(ngModel)]="transaccion.monedaDestino" (input)="limpiar()" required>
+          <option *ngFor="let moneda of monedas" [value]="moneda.symbol">{{moneda.name}}</option>
+        </select>
+        <div *ngIf="conversion.invalid && (conversion.dirty || conversion.touched)" class="alert alert-danger rounded-0 mt-1">
+          <div *ngIf="conversion.errors?.['required']" class="alert-danger">
+            Debe ingresar una moneda final antes de continuar.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="resultado">Resultado:</label>
+        <p *ngIf="resultado.conversion != 0" class="form-control-static">{{resultado.conversion | number:'2.1-2'}} {{resultado.moneda}}</p>
+      </div>
+      <input type="submit" class="btn btn-success" (click)="getConversion()" value="Convertir" [disabled]="!formularioConversion.valid"/>
+    </form>
+  </div>
+</div>
